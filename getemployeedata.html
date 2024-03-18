@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <!--<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration Form</title>-->
+
+   <link href="../css/play_with_employee_data.css" rel="stylesheet" type="text/css"></link>
+</head>
+<body>
+
+<!--<h1>Employee Registration Form</h1>-->
+
+<!--
+<form id="employeeForm">
+    <label for="emp_id">Employee ID:</label>
+    <input type="number" id="emp_id" required>
+
+    <input type="button" value="Get Employee Data" onclick="getEmployeeData()">
+</form>
+-->
+<input type="button" value = "Add Employee" id="add_employee" onClick="addEmployee()"  style="display:none;" /></br>
+<table id="employee_table" style="display:none;" style="width:50%"></table>
+
+
+<div id="employee_view" style="display:none;"></div>
+
+<div id = "employee_edit_form" style="display:none;"></div>
+
+
+
+<script src="../js/createtable.js"></script>
+<script src="../js/play_with_employee_data.js"></script>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('id');
+    const operation = urlParams.get('op');
+    if(myParam) {
+        console.log(myParam);
+        if(operation && operation.toUpperCase() == "EDIT") {
+            var employeeEditForm = document.getElementById("employee_edit_form");
+            employeeEditForm.style.display = "block";
+            renderEmployeeEditForm(employeeEditForm, myParam);
+        } else {
+            var employeeDetails = document.getElementById("employee_view");
+            employeeDetails.style.display = "block";
+            renderEmployeeById(employeeDetails, Number(myParam));
+        }
+    } else {
+        /*
+        var myTable = document.getElementById("employee_table");
+        myTable.style.display = "block";
+        buildTableViaJavascriptString(myTable, headers, keys, employees);
+        var tableStr = buildTableViaJavascriptString(myTable, headers, keys, employees);
+        document.getElementById("myTable").innerHTML = tableStr;
+        */
+        backToList();
+    }
+
+
+</script>
+
+</body>
+</html>
